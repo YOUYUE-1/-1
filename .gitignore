@@ -1,0 +1,63 @@
+# Keil MDK-ARM 编译产物和临时文件
+*.o
+*.d
+*.crf
+*.axf
+*.htm
+*.lnp
+*.lst
+*.map
+*.obj
+*.hex
+*.bin
+*.elf
+*.iex
+*.pbd
+*.browse
+*.tmp
+*.__i
+*._ia
+
+# Keil 项目临时文件
+*.uvguix.*
+*.bak
+*.dep
+*.uvopt
+*.plg
+*.tra
+*.fed
+*.L1
+*.L2
+*.iex
+
+# 编译输出目录
+MDK-ARM/GD32-1/
+MDK-ARM/*.uvguix.*
+
+# 调试文件
+DebugConfig/
+RTE/
+
+# 系统临时文件
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# IDE 配置文件（保留 .uvprojx 和 .uvoptx，但排除用户相关）
+*.uvguix
+*.uvgui.*
+
+# 日志文件
+*.log
+
+# 备份文件
+*_backup
+*.orig
+
+# FatFS 生成的文件（如果有的话）
+# FATFS/generated/
+
+# 其他临时文件
+*.tmp
+*.temp
