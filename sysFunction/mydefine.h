@@ -24,7 +24,13 @@
 #include "Oled_app.h"
 #include "flash_app.h"
 #include "RTC_app.h"
+#include "sample_app.h"
 
+// sysFunction模块（赛题要求）
+#include "config/config_manager.h"
+#include "storage/data_storage.h"
+#include "system/system_test.h"
+#include "shell_ext/shell_cmds.h"
 
 extern uint8_t ucLed[6];
 extern uint8_t uart_rx_buffer[128];

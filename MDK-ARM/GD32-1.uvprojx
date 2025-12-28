@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F429xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../APP;../Components/ringbuffer;../Components/ebtn;../Components/Oled;../Components/u8g2;../Components/GD25QXX;../FATFS/Target;../FATFS/App;../Middlewares/Third_Party/FatFs/src</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Components/ringbuffer;../Components/ebtn;../Components/Oled;../Components/u8g2;../Components/GD25QXX;../FATFS/Target;../FATFS/App;../Middlewares/Third_Party/FatFs/src;..\sysFunction;..\sysFunction\config;..\sysFunction\crypto;..\sysFunction\sampling;..\sysFunction\shell_ext;..\sysFunction\storage;..\sysFunction\system</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1841,56 +1841,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>APP</GroupName>
-          <Files>
-            <File>
-              <FileName>mydefine.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\APP\mydefine.h</FilePath>
-            </File>
-            <File>
-              <FileName>scheduler.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\scheduler.c</FilePath>
-            </File>
-            <File>
-              <FileName>led_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\led_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>Key_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\Key_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>usart_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\usart_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>adc_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\adc_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>Oled_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\Oled_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>flash_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\flash_app.c</FilePath>
-            </File>
-            <File>
-              <FileName>RTC_app.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\APP\RTC_app.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>Components.ringbuf</GroupName>
           <Files>
             <File>
@@ -2602,6 +2552,76 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>sysFunction</GroupName>
+          <Files>
+            <File>
+              <FileName>adc_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\adc_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>flash_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\flash_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>Key_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\Key_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>led_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\led_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>Oled_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\Oled_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>RTC_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\RTC_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>scheduler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\scheduler.c</FilePath>
+            </File>
+            <File>
+              <FileName>usart_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\usart_app.c</FilePath>
+            </File>
+            <File>
+              <FileName>config_manager.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\config\config_manager.c</FilePath>
+            </File>
+            <File>
+              <FileName>data_storage.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\storage\data_storage.c</FilePath>
+            </File>
+            <File>
+              <FileName>system_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\system\system_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>shell_cmds.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\shell_ext\shell_cmds.c</FilePath>
+            </File>
+            <File>
+              <FileName>sample_app.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\sysFunction\sample_app.c</FilePath>
             </File>
           </Files>
         </Group>

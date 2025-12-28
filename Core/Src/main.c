@@ -108,15 +108,36 @@ int main(void)
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
+	// 基础外设初始化
 	rt_ringbuffer_init(&uart_ringbuffer,ringbuffer_pool,sizeof(ringbuffer_pool));
-	my_printf(&huart1,"Hello\r\n");
 	adc_dma_init();
-	//dac_sin_init();
-	//adc_tim_dma_init();
 	app_btn_init();
 	OLED_Init();
-	test_spi_flash();
-	test_sd_fatfs();
+
+	// 初始化SPI Flash驱动（不输出测试信息）
+	spi_flash_init();
+
+	// 初始化SD卡（挂载文件系统，不输出测试信息）
+	f_mount(&SDFatFS, SDPath, 1);
+
+	// ====system init==== （赛题要求1.1）
+	my_printf(&huart1,"\r\n====system init====\r\n");
+
+	// Flash参数管理初始化
+	flash_param_init();
+
+	// 从Flash中读取设备ID号（赛题要求1.2）
+	my_printf(&huart1,"%s\r\n", flash_get_device_id());
+
+	// SD卡存储初始化（创建4个数据文件夹）
+	storage_init();
+
+	// ====system ready==== （赛题要求格式）
+	my_printf(&huart1,"====system ready====\r\n");
+
+	// OLED显示"system idle"（赛题要求）
+	Oled_printf(0, 0, "system idle");  // 第一行显示
+
 	scheduler_init();
   /* USER CODE END 2 */
 

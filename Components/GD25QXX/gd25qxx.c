@@ -8,7 +8,7 @@
 
 #define READ 0x03 /* read from memory instruction */
 #define RDSR 0x05 /* read status register instruction  */
-#define RDID 0x90 /* read identification */
+#define RDID 0x9F /* read JEDEC ID (Manufacturer + Memory Type + Capacity) */
 #define SE 0x20   /* sector erase instruction */
 #define BE 0xC7   /* bulk erase instruction */
 
@@ -30,12 +30,15 @@ void spi_flash_init(void)
     // Ensure CS pin is high (deselected) initially.
     // The GPIO for CS (PB12 in your macros) should be configured as output push-pull in MX_GPIO_Init.
     SPI_FLASH_CS_HIGH();
-    // Optional: Add a small delay if needed after power-up or SPI init, before first command
-    // HAL_Delay(1);
 
-    // Optional: You could read the Flash ID here to verify communication
+    // 等待Flash芯片上电稳定（部分芯片需要10-100ms）
+    HAL_Delay(10);
+
+    // 可选：读取Flash ID验证通信
     // uint32_t id = spi_flash_read_id();
-    // (Add code to check ID or print it for debugging)
+    // if (id != 0x000000 && id != 0xFFFFFF) {
+    //     // Flash通信正常
+    // }
 }
 
 void spi_flash_sector_erase(uint32_t sector_addr)

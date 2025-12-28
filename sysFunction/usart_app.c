@@ -149,59 +149,21 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 
 void uart_task(void)
 {
-  uint16_t lenth;  
-	lenth=rt_ringbuffer_data_len(&uart_ringbuffer);
-	if(lenth==0) return;
-	int pwm_temp = 0; // 用来暂存解析出来的数字
-	
-	rt_ringbuffer_get(&uart_ringbuffer,uart_dma_buffer,lenth);
+	uint16_t lenth;
+	lenth = rt_ringbuffer_data_len(&uart_ringbuffer);
+	if (lenth == 0) return;
+
+	// 从环形缓冲区读取数据
+	rt_ringbuffer_get(&uart_ringbuffer, uart_dma_buffer, lenth);
 	uart_dma_buffer[lenth] = '\0';
-    // 3. 处理 "待处理货架" (uart_dma_buffer) 中的数据
-    //    这里简单地打印出来，实际应用中会进行解析、执行命令等
-   my_printf(&huart1,"DMA data: %s\n", uart_dma_buffer);
-    //    (注意：如果数据不是字符串，需要用其他方式处理，比如按字节解析)
-		
 
-    // 1. 识别指令头 (先看是不是这一类指令)
-  if (strstr((char *)uart_dma_buffer, "SET_PWM:") != NULL)
-  {
-      // 2. 【核心】提取参数
-      // sscanf 会返回成功解析出的变量个数。
-      // 这里我们期望解析 1 个整数，所以如果成功应该返回 1。
-      int result = sscanf((char *)uart_dma_buffer, "SET_PWM:%d", &pwm_temp);
+	// 回显输入的命令（赛题要求）
+	my_printf(&huart1, "%s\r\n", uart_dma_buffer);
 
-      // 3. 校验解析是否成功
-      if (result == 1)
-      {
-          // 解析成功！pwm_temp 现在等于 50 了
-          if (pwm_temp < 0) pwm_temp = 0;      // 下限钳位
-					if (pwm_temp > 100) pwm_temp = 100;  // 上限钳位
-          // 4. 执行业务逻辑 (比如设置占空比)
-          // set_pwm_duty(pwm_temp); 
-          
-          my_printf(&huart1, "PWM Updated: %d%%\r\n", pwm_temp);
-      }
-      else
-      {
-          my_printf(&huart1, "Format Error! Use: SET_PWM:xx\r\n");
-      }
-	}
-	else if (strstr((char *)uart_dma_buffer, "LED0_ON") != NULL)
-	{
-		ucLed[0]^=1;
-		my_printf(&huart1,"LED0_SUCCESS\r\n");
-	}
-	else if (strstr((char *)uart_dma_buffer, "LED1_ON") != NULL)
-	{
-		ucLed[1]^=1;
-		my_printf(&huart1,"LED1_SUCCESS\r\n");
-	}
-	else
-		my_printf(&huart1,"EEROR\r\n");
-    // 4. 清空"待处理货架"，为下次接收做准备
-  // memset(uart_dma_buffer, 0, sizeof(uart_dma_buffer));
-	//该操作可省略原理就是前面在新数据末尾加入\0操作，可以让strstr读取函数时只读取到新数据
-}//以uart_flag = 1;的空闲解析
+	// 调用Shell命令处理框架（赛题要求的命令）
+	shell_process_command((char *)uart_dma_buffer);
+}
+//以uart_flag = 1;的空闲解析
 
 
 
